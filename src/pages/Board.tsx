@@ -1,3 +1,9 @@
+import Whiteboard from "../components/Whiteboard";
+
 export default function Board() {
-  return <h1>Aquí va la pizarra 📝</h1>;
+  return (
+    <div className="w-screen h-screen bg-gray-100">
+      <Whiteboard />
+    </div>
+  );
 }

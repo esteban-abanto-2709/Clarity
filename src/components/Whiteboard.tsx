@@ -1,5 +1,6 @@
 import { Stage, Layer, Line } from "react-konva";
 import { useState } from "react";
+import type { KonvaEventObject } from "konva/lib/Node";
 
 export default function Whiteboard() {
   const [lines, setLines] = useState<{ x: number; y: number }[][]>([]);
@@ -10,10 +11,12 @@ export default function Whiteboard() {
     setLines([...lines, []]); // empieza una nueva línea
   };
 
-  const handleMouseMove = (e: any) => {
+  const handleMouseMove = (e: KonvaEventObject<PointerEvent>) => {
     if (!isDrawing) return;
     const stage = e.target.getStage();
-    const point = stage.getPointerPosition();
+    const point = stage?.getPointerPosition();
+    if (!point) return;
+
     const newLines = [...lines];
     newLines[newLines.length - 1] = [
       ...newLines[newLines.length - 1],

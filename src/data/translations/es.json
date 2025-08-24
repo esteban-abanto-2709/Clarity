@@ -1,0 +1,63 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "close": "Cerrar"
+  },
+  "navigation": {
+    "workspace": "Ir al Workspace",
+    "home": "Inicio",
+    "boards": "Tableros"
+  },
+  "landing": {
+    "title": "Tu lienzo digital",
+    "titleHighlight": "infinito",
+    "subtitle": "Organiza, conecta y da forma a tus ideas de manera visual. Sin límites, sin fricciones, sin barreras.",
+    "hero": {
+      "createBoard": "Crear mi primer Board"
+    },
+    "features": {
+      "visual": {
+        "title": "Organización Visual",
+        "description": "Canvas infinito con drag & drop intuitivo para tus ideas"
+      },
+      "noRegister": {
+        "title": "Sin Registro",
+        "description": "Empieza inmediatamente sin cuentas ni configuraciones"
+      },
+      "subBoards": {
+        "title": "Sub-boards",
+        "description": "Crea boards dentro de boards para organización avanzada"
+      }
+    },
+    "footer": {
+      "madeWith": "Hecho con ❤️ por",
+      "openSource": "• Código abierto"
+    }
+  },
+  "workspace": {
+    "title": "Espacio de Trabajo",
+    "createNewBoard": "Crear Nuevo Tablero",
+    "myBoards": "Mis Tableros",
+    "recentBoards": "Tableros Recientes"
+  },
+  "board": {
+    "untitled": "Sin título",
+    "addCard": "Agregar Tarjeta",
+    "addText": "Agregar Texto",
+    "addImage": "Agregar Imagen",
+    "addNote": "Agregar Nota"
+  },
+  "settings": {
+    "title": "Configuración",
+    "language": "Idioma",
+    "theme": "Tema",
+    "dark": "Oscuro",
+    "light": "Claro",
+    "auto": "Automático"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "close": "Close"
+  },
+  "navigation": {
+    "workspace": "Go to Workspace",
+    "home": "Home",
+    "boards": "Boards"
+  },
+  "landing": {
+    "title": "Your infinite",
+    "titleHighlight": "digital canvas",
+    "subtitle": "Organize, connect and shape your ideas visually. No limits, no friction, no barriers.",
+    "hero": {
+      "createBoard": "Create my first Board"
+    },
+    "features": {
+      "visual": {
+        "title": "Visual Organization",
+        "description": "Infinite canvas with intuitive drag & drop for your ideas"
+      },
+      "noRegister": {
+        "title": "No Registration",
+        "description": "Start immediately without accounts or configurations"
+      },
+      "subBoards": {
+        "title": "Sub-boards",
+        "description": "Create boards within boards for advanced organization"
+      }
+    },
+    "footer": {
+      "madeWith": "Made with ❤️ by",
+      "openSource": "• Open Source"
+    }
+  },
+  "workspace": {
+    "title": "Workspace",
+    "createNewBoard": "Create New Board",
+    "myBoards": "My Boards",
+    "recentBoards": "Recent Boards"
+  },
+  "board": {
+    "untitled": "Untitled",
+    "addCard": "Add Card",
+    "addText": "Add Text",
+    "addImage": "Add Image",
+    "addNote": "Add Note"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "auto": "Auto"
+  }
+}

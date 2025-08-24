@@ -1,76 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useI18n } from '../lib/i18n';
+import type { Language } from '../lib/i18n';
 
 export default function Landing() {
   const [isDark, setIsDark] = useState(true);
-  const [language, setLanguage] = useState('es');
-
-  // Translations object
-  const translations = {
-    es: {
-      title: "Tu lienzo digital",
-      titleHighlight: "infinito",
-      subtitle: "Organiza, conecta y da forma a tus ideas de manera visual. Sin límites, sin fricciones, sin barreras.",
-      nav: {
-        workspace: "Ir al Workspace"
-      },
-      hero: {
-        createBoard: "Crear mi primer Board"
-      },
-      features: {
-        visual: {
-          title: "Organización Visual",
-          desc: "Canvas infinito con drag & drop intuitivo para tus ideas"
-        },
-        shareable: {
-          title: "Sin Registro",
-          desc: "Empieza inmediatamente sin cuentas ni configuraciones"
-        },
-        instant: {
-          title: "Sub-boards",
-          desc: "Crea boards dentro de boards para organización avanzada"
-        }
-      },
-      footer: {
-        madeWith: "Hecho con ❤️ por",
-        openSource: "• Código abierto"
-      }
-    },
-    en: {
-      title: "Your infinite",
-      titleHighlight: "digital canvas",
-      subtitle: "Organize, connect and shape your ideas visually. No limits, no friction, no barriers.",
-      nav: {
-        workspace: "Go to Workspace"
-      },
-      hero: {
-        createBoard: "Create my first Board"
-      },
-      features: {
-        visual: {
-          title: "Visual Organization",
-          desc: "Infinite canvas with intuitive drag & drop for your ideas"
-        },
-        shareable: {
-          title: "No Registration",
-          desc: "Start immediately without accounts or configurations"
-        },
-        instant: {
-          title: "Sub-boards",
-          desc: "Create boards within boards for advanced organization"
-        }
-      },
-      footer: {
-        madeWith: "Made with ❤️ by",
-        openSource: "• Open Source"
-      }
-    }
-  };
-
-  const t = translations[language];
+  const { language, changeLanguage, t, isLoading } = useI18n();
 
   useEffect(() => {
     // Check for saved theme preference or default to dark
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('clarity-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (savedTheme) {
@@ -78,39 +16,41 @@ export default function Landing() {
     } else {
       setIsDark(prefersDark);
     }
-
-    // Check for saved language
-    const savedLanguage = localStorage.getItem('language');
-    if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
-      setLanguage(savedLanguage);
-    }
   }, []);
 
   useEffect(() => {
     // Apply theme to document
     document.documentElement.classList.toggle('dark', isDark);
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    localStorage.setItem('clarity-theme', isDark ? 'dark' : 'light');
   }, [isDark]);
-
-  useEffect(() => {
-    // Save language preference
-    localStorage.setItem('language', language);
-    // Update document title
-    document.title = `Clarity - ${t.title} ${t.titleHighlight}`;
-  }, [language, t]);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
   };
 
   const toggleLanguage = () => {
-    setLanguage(language === 'es' ? 'en' : 'es');
+    const newLanguage: Language = language === 'es' ? 'en' : 'es';
+    changeLanguage(newLanguage);
   };
+
+  // Mostrar loading mientras se cargan las traducciones
+  if (isLoading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center transition-all duration-700 ${isDark
+        ? 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
+        : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50'
+        }`}>
+        <div className={`text-2xl font-light ${isDark ? 'text-white' : 'text-slate-800'}`}>
+          {t('common.loading')}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
       {/* Custom CSS for glassmorphism and animations */}
-      <style jsx>{`
+      <style>{`
         .glass {
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
@@ -238,7 +178,7 @@ export default function Landing() {
                     }`}
                 >
                   <span className="transition-transform duration-300 group-hover:scale-110">🚀</span>
-                  {t.nav.workspace}
+                  {t('navigation.workspace')}
                   <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -280,15 +220,15 @@ export default function Landing() {
               <div className="mb-8">
                 <h1 className={`text-5xl md:text-7xl lg:text-8xl font-extralight mb-6 transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-900'
                   }`}>
-                  {t.title}
+                  {t('landing.title')}
                   <span className="block font-bold bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
-                    {t.titleHighlight}
+                    {t('landing.titleHighlight')}
                   </span>
                 </h1>
 
                 <p className={`text-lg md:text-xl max-w-2xl mx-auto leading-relaxed transition-colors duration-300 ${isDark ? 'text-white/60' : 'text-slate-600'
                   }`}>
-                  {t.subtitle}
+                  {t('landing.subtitle')}
                 </p>
               </div>
 
@@ -302,7 +242,7 @@ export default function Landing() {
                     }`}
                 >
                   <span className="transition-transform duration-300 group-hover:scale-110">✨</span>
-                  {t.hero.createBoard}
+                  {t('landing.hero.createBoard')}
                   <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -312,9 +252,9 @@ export default function Landing() {
               {/* Features Grid */}
               <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                 {[
-                  { icon: '🎨', title: t.features.visual.title, desc: t.features.visual.desc },
-                  { icon: '⚡', title: t.features.shareable.title, desc: t.features.shareable.desc },
-                  { icon: '🔗', title: t.features.instant.title, desc: t.features.instant.desc }
+                  { icon: '🎨', title: t('landing.features.visual.title'), desc: t('landing.features.visual.description') },
+                  { icon: '⚡', title: t('landing.features.noRegister.title'), desc: t('landing.features.noRegister.description') },
+                  { icon: '🔗', title: t('landing.features.subBoards.title'), desc: t('landing.features.subBoards.description') }
                 ].map((feature, index) => (
                   <div
                     key={feature.title}
@@ -344,7 +284,7 @@ export default function Landing() {
           {/* Footer */}
           <footer className="p-6 text-center">
             <p className={`text-sm transition-colors duration-300 ${isDark ? 'text-white/40' : 'text-slate-500'}`}>
-              {t.footer.madeWith}{" "}
+              {t('landing.footer.madeWith')}{" "}
               <a
                 href="mailto:esteban.abanto.2709@gmail.com"
                 className={`transition-colors duration-300 hover:underline ${isDark ? 'text-white/60 hover:text-white/80' : 'text-slate-600 hover:text-slate-800'
@@ -352,7 +292,7 @@ export default function Landing() {
               >
                 Esteban Abanto
               </a>
-              {" "}{t.footer.openSource}
+              {" "}{t('landing.footer.openSource')}
             </p>
           </footer>
         </div>

@@ -6,53 +6,68 @@
 
 ## ✨ Concepto y Visión
 
-**Clarity** es una aplicación web diseñada para ser el espacio definitivo de organización visual de ideas. Con un enfoque abierto, minimalista y sin barreras de uso, Clarity busca convertirse en un **lienzo digital** donde los usuarios puedan **conectar, organizar y dar forma a sus pensamientos** con total libertad.
+**Clarity** es una aplicación web diseñada como un canvas infinito minimalista, inspirado en lo mejor de herramientas como Canvas Whiteboard, Milanote, Excalidraw y Draw.io. Su objetivo es ofrecer un entorno abierto, sin fricciones y totalmente visual, donde los usuarios puedan pensar, organizar y dar forma a sus ideas.
 
-La idea central es crear boards/canvas colaborativos y modulares que ofrezcan un entorno **intuitivo, gratuito y accesible**, permitiendo trabajar desde un esquema rápido de notas hasta la organización de proyectos completos.
+La visión central es construir un espacio de trabajo fluido y visual, accesible sin cuentas ni barreras, donde cada persona pueda crear sus propios boards/canvas, moverse libremente en un lienzo infinito y dar vida a sus pensamientos, desde simples notas rápidas hasta esquemas más complejos.
+
+## 🎨 Referencias Clave
+
+- **Canvas Whiteboard** → Base de la experiencia de usuario (UI/UX intuitiva, navegación y sensación de espacio infinito)
+- **Milanote** → Inspiración en la idea de boards dentro de boards (sub-canvases)
+- **Excalidraw** → Facilidad para dibujar y crear trazos sin fricciones
+- **Draw.io** → Uso inmediato sin necesidad de registro, con opción de guardar avances en Google Drive
+
+## 🚫 Qué NO es (por ahora)
+
+- ❌ **No es una herramienta de colaboración multiusuario** (no usa sockets ni tiempo real)
+- ❌ **No incluye sistema de compartir públicamente** los boards (tal vez en fases futuras)
+- ❌ **No es un gestor de proyectos clásico**: está enfocado en la organización visual, no en tareas ni calendarios
 
 ## 🎨 Filosofía de Diseño
 
-- **Glassmorphism minimalista**: Transparencias, difuminados y estética futurista que transmiten elegancia y ligereza visual
-- **Enfoque en claridad y simplicidad**: Sin elementos que saturen; cada idea respira en el espacio
-- **Futurista pero humano**: Visualmente moderno, siempre centrado en la experiencia de usuario y facilidad de uso
+- **Glassmorphism minimalista**: Transparencias, difuminados y estética futurista
+- **Claridad y simplicidad**: Un espacio limpio donde las ideas respiran
+- **Futurista pero humano**: Moderno en lo visual, siempre centrado en la facilidad de uso
+- **Sin fricciones**: Empieza a usar Clarity sin cuentas, registros ni barreras
 
 ## 🚀 Características Principales (MVP)
 
 ### Core Features
 
-- **📋 Boards dinámicos**: Crea tableros ilimitados para organizar tus proyectos
+- **📋 Boards dinámicos**: Crea y navega en múltiples tableros
 - **🧩 Elementos modulares**: Tarjetas de texto, imágenes, listas, enlaces y notas rápidas
-- **🖱️ Drag & Drop**: Organiza ideas de forma visual e intuitiva
-- **🔗 Enlaces compartibles**: Cada board se puede compartir con un link único
-- **⚡ Edición en tiempo real**: Los cambios se reflejan instantáneamente en el canvas
-- **🌐 100% Web**: Sin instalación necesaria, optimizada para desktop
+- **🖱️ Drag & Drop**: Organiza de forma intuitiva y visual
+- **🔗 Sub-boards**: Abre nuevos canvases desde un elemento dentro de otro (inspirado en Milanote)
+- **⚡ Navegación fluida**: Zoom infinito y movimiento libre dentro del canvas
+- **🌐 100% Web**: Accesible sin descargas ni cuentas
 
-> **Nota**: Fase inicial orientada a un solo usuario; la colaboración multiusuario se explorará en fases posteriores.
+> **Nota**: En la fase inicial, Clarity es para un solo usuario local, con persistencia en navegador.
 
 ## 🛠️ Stack Técnico
 
 ### Frontend
 
-- **Framework**: [Next.js](https://nextjs.org/) - Potente enrutamiento (`/board/[id]`), alto rendimiento y despliegue sencillo
-- **UI Library**: React + [Tailwind CSS](https://tailwindcss.com/) - Interfaz rápida, escalable con soporte nativo para Glassmorphism
-- **Tipografía**: Inter, Manrope o Sora para una estética moderna
+- **Framework**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/) → Simple, rápido y moderno
+- **UI Library**: React + [Tailwind CSS](https://tailwindcss.com/) → Base visual con Glassmorphism
+- **Canvas Engine**: [Konva.js](https://konvajs.org/) / React-Konva → Renderizado del lienzo infinito
+- **Tipografía**: Inter, Manrope o Sora para estética limpia y moderna
 
 ### Persistencia de Datos
 
 #### Fase 1 (Sin Backend)
 
 - Almacenamiento en `localStorage`
-- Exportación de boards como JSON
+- Exportación/Importación de boards en JSON
 
-#### Fase 2 (Backend Ligero)
+#### Fase 2 (Opcional)
 
-- Integración con servicios serverless (Supabase, Firebase, o API propia)
-- Guardado en la nube con Express/Prisma
+- Guardado en la nube (ej. Supabase, Firebase o API ligera propia)
+- Opción de sincronización con Google Drive
 
 ### Hosting & Deploy
 
-- **Platform**: [Vercel](https://vercel.com/) - Perfectamente integrado con Next.js
-- **Estilo Visual**: Glassmorphism con `backdrop-filter`, paleta neutra (blancos, grises, toques de azul/lila)
+- **Platform**: [Vercel](https://vercel.com/) o [Netlify](https://netlify.com/)
+- **Estilo Visual**: Glassmorphism con `backdrop-filter`, paleta neutra (grises, azules, lilas)
 
 ## 🗺️ Roadmap de Desarrollo
 
@@ -66,21 +81,22 @@ La idea central es crear boards/canvas colaborativos y modulares que ofrezcan un
 ### 🎯 Fase 2: Funcionalidades Clave
 
 - [ ] Tipos de tarjetas adicionales (imágenes, listas, links)
-- [ ] Sistema de exportar/importar boards (JSON)
-- [ ] Links compartibles sin registro
+- [ ] Sub-boards (abrir un canvas dentro de otro)
+- [ ] Exportar/Importar boards (JSON)
+- [ ] Guardado opcional en Google Drive
 
 ### 🚀 Fase 3: Expansión
 
-- [ ] Sistema de registro opcional para persistencia en la nube
 - [ ] Colaboración multiusuario en tiempo real
+- [ ] Compartir boards con enlaces públicos
 - [ ] Mejoras de UX (temas, atajos de teclado, plantillas)
 
 ## 💡 Diferenciales Clave
 
-- **🆓 Completamente gratuito**: Sin límites en boards o elementos
-- **🎯 Minimalismo extremo**: Interfaz limpia centrada en la claridad visual
-- **⚡ Deploy simple**: Optimizado para Vercel sin backends complejos
-- **🎨 Enfoque creativo**: Ideal para creativos, estudiantes, diseñadores y cualquier persona que busque un espacio visual sin fricciones
+- **🆓 Uso inmediato y gratuito** → Sin necesidad de registro
+- **🎯 Minimalismo extremo** → Interfaz clara y ligera
+- **⚡ Fluidez total** → Zoom infinito, navegación sin cortes
+- **🎨 Pensado para creativos** → No es una herramienta corporativa, sino un espacio visual libre
 
 ## 🚦 Getting Started
 
@@ -105,20 +121,19 @@ npm install
 npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
+Abre [http://localhost:5173](http://localhost:5173) en tu navegador para ver la aplicación.
 
 ## 📁 Estructura del Proyecto
 
 ``` cmd
 clarity/
 ├── components/          # Componentes reutilizables
-├── pages/              # Páginas de Next.js
-│   ├── api/           # API routes (futuro)
-│   ├── board/         # Páginas dinámicas de boards
-│   └── index.js       # Página principal
-├── styles/            # Estilos globales y Tailwind
-├── lib/               # Utilidades y helpers
-├── public/            # Assets estáticos
+├── src/                 # Código fuente principal
+│   ├── pages/           # Rutas de React Router (boards, home, etc.)
+│   ├── hooks/           # Custom hooks
+│   ├── styles/          # Estilos globales y Tailwind
+│   └── lib/             # Utilidades y helpers
+├── public/              # Assets estáticos
 └── README.md
 ```
 
@@ -126,10 +141,10 @@ clarity/
 
 Las contribuciones son bienvenidas. Por favor:
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
+1. Haz un fork del proyecto
+2. Crea una rama (`git checkout -b feature/nueva-funcionalidad`)
 3. Commit tus cambios (`git commit -m 'Añade nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+4. Push a tu rama (`git push origin feature/nueva-funcionalidad`)
 5. Abre un Pull Request
 
 ## 📞 Contacto

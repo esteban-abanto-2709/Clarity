@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Board from "./pages/Board";
+import Landing from "./pages/Landing";
+import Workspace from "./pages/Workspace";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/board/:id" element={<Board />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/workspace" element={<Workspace />} />
       </Routes>
     </BrowserRouter>
   );

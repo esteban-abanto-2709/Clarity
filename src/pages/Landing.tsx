@@ -1,0 +1,362 @@
+import { useState, useEffect } from 'react';
+
+export default function Landing() {
+  const [isDark, setIsDark] = useState(true);
+  const [language, setLanguage] = useState('es');
+
+  // Translations object
+  const translations = {
+    es: {
+      title: "Tu lienzo digital",
+      titleHighlight: "infinito",
+      subtitle: "Organiza, conecta y da forma a tus ideas de manera visual. Sin límites, sin fricciones, sin barreras.",
+      nav: {
+        workspace: "Ir al Workspace"
+      },
+      hero: {
+        createBoard: "Crear mi primer Board"
+      },
+      features: {
+        visual: {
+          title: "Organización Visual",
+          desc: "Canvas infinito con drag & drop intuitivo para tus ideas"
+        },
+        shareable: {
+          title: "Sin Registro",
+          desc: "Empieza inmediatamente sin cuentas ni configuraciones"
+        },
+        instant: {
+          title: "Sub-boards",
+          desc: "Crea boards dentro de boards para organización avanzada"
+        }
+      },
+      footer: {
+        madeWith: "Hecho con ❤️ por",
+        openSource: "• Código abierto"
+      }
+    },
+    en: {
+      title: "Your infinite",
+      titleHighlight: "digital canvas",
+      subtitle: "Organize, connect and shape your ideas visually. No limits, no friction, no barriers.",
+      nav: {
+        workspace: "Go to Workspace"
+      },
+      hero: {
+        createBoard: "Create my first Board"
+      },
+      features: {
+        visual: {
+          title: "Visual Organization",
+          desc: "Infinite canvas with intuitive drag & drop for your ideas"
+        },
+        shareable: {
+          title: "No Registration",
+          desc: "Start immediately without accounts or configurations"
+        },
+        instant: {
+          title: "Sub-boards",
+          desc: "Create boards within boards for advanced organization"
+        }
+      },
+      footer: {
+        madeWith: "Made with ❤️ by",
+        openSource: "• Open Source"
+      }
+    }
+  };
+
+  const t = translations[language];
+
+  useEffect(() => {
+    // Check for saved theme preference or default to dark
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme) {
+      setIsDark(savedTheme === 'dark');
+    } else {
+      setIsDark(prefersDark);
+    }
+
+    // Check for saved language
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage && (savedLanguage === 'es' || savedLanguage === 'en')) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Apply theme to document
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
+
+  useEffect(() => {
+    // Save language preference
+    localStorage.setItem('language', language);
+    // Update document title
+    document.title = `Clarity - ${t.title} ${t.titleHighlight}`;
+  }, [language, t]);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'es' ? 'en' : 'es');
+  };
+
+  return (
+    <>
+      {/* Custom CSS for glassmorphism and animations */}
+      <style jsx>{`
+        .glass {
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-strong {
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .bg-orbs {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          z-index: 1;
+        }
+        
+        .orb {
+          position: absolute;
+          border-radius: 50%;
+          opacity: 0.1;
+          animation: float 20s infinite ease-in-out;
+        }
+        
+        .orb:nth-child(1) {
+          width: 400px;
+          height: 400px;
+          background: linear-gradient(45deg, #8b5cf6, #06b6d4);
+          top: -200px;
+          left: -200px;
+          animation-delay: 0s;
+        }
+        
+        .orb:nth-child(2) {
+          width: 300px;
+          height: 300px;
+          background: linear-gradient(45deg, #ec4899, #8b5cf6);
+          bottom: -150px;
+          right: -150px;
+          animation-delay: -10s;
+        }
+        
+        .orb:nth-child(3) {
+          width: 200px;
+          height: 200px;
+          background: linear-gradient(45deg, #06b6d4, #10b981);
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          animation-delay: -5s;
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+          33% { transform: translate(30px, -30px) rotate(120deg); }
+          66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+        
+        .animate-fadeInUp {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fadeInScale {
+          animation: fadeInScale 0.6s ease-out forwards;
+        }
+        
+        .animate-delay-100 {
+          animation-delay: 0.1s;
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fadeInScale {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
+
+      <div className={`min-h-screen transition-all duration-700 ${isDark
+        ? 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
+        : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50'
+        }`}>
+        {/* Background orbs */}
+        <div className="bg-orbs">
+          <div className="orb"></div>
+          <div className="orb"></div>
+          <div className="orb"></div>
+        </div>
+
+        <div className="relative z-10 min-h-screen flex flex-col">
+          {/* Header */}
+          <header className="p-6 md:p-8 flex justify-between items-center">
+            <div className={`text-2xl md:text-3xl font-bold transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-800'
+              }`}>
+              ✨ Clarity
+            </div>
+
+            <div className="flex items-center gap-6">
+              <nav className="md:flex gap-8">
+                <a
+                  href="/workspace"
+                  className={`glass inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 group ${isDark
+                    ? 'bg-white/10 text-white hover:bg-white/20'
+                    : 'bg-white/30 text-slate-800 hover:bg-white/50'
+                    }`}
+                >
+                  <span className="transition-transform duration-300 group-hover:scale-110">🚀</span>
+                  {t.nav.workspace}
+                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </nav>
+
+              <div className="flex items-center gap-3">
+                {/* Language Toggle */}
+                <button
+                  onClick={toggleLanguage}
+                  className={`glass rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-110 ${isDark
+                    ? 'bg-white/5 hover:bg-white/10 text-white'
+                    : 'bg-white/30 hover:bg-white/50 text-slate-800'
+                    }`}
+                >
+                  {language.toUpperCase()}
+                </button>
+
+                {/* Theme Toggle */}
+                <button
+                  onClick={toggleTheme}
+                  className={`glass rounded-full p-3 transition-all duration-300 hover:scale-110 group ${isDark
+                    ? 'bg-white/5 hover:bg-white/10'
+                    : 'bg-white/30 hover:bg-white/50'
+                    }`}
+                >
+                  <div className="text-xl transition-transform duration-500 group-hover:rotate-180">
+                    {isDark ? '🌙' : '☀️'}
+                  </div>
+                </button>
+              </div>
+            </div>
+          </header>
+
+          {/* Hero Section */}
+          <main className="flex-1 flex items-center justify-center px-6 py-16 text-center">
+            <div className="max-w-5xl animate-fadeInUp">
+              {/* Main Title */}
+              <div className="mb-8">
+                <h1 className={`text-5xl md:text-7xl lg:text-8xl font-extralight mb-6 transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-900'
+                  }`}>
+                  {t.title}
+                  <span className="block font-bold bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
+                    {t.titleHighlight}
+                  </span>
+                </h1>
+
+                <p className={`text-lg md:text-xl max-w-2xl mx-auto leading-relaxed transition-colors duration-300 ${isDark ? 'text-white/60' : 'text-slate-600'
+                  }`}>
+                  {t.subtitle}
+                </p>
+              </div>
+
+              {/* CTA Section */}
+              <div className="mb-20 animate-fadeInScale animate-delay-100">
+                <a
+                  href="/workspace"
+                  className={`glass-strong inline-flex items-center gap-3 px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 hover:scale-105 hover:-translate-y-1 group ${isDark
+                    ? 'bg-white/10 text-white hover:bg-white/20 shadow-lg shadow-purple-500/10'
+                    : 'bg-white/40 text-slate-800 hover:bg-white/60 shadow-lg shadow-blue-500/10'
+                    }`}
+                >
+                  <span className="transition-transform duration-300 group-hover:scale-110">✨</span>
+                  {t.hero.createBoard}
+                  <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Features Grid */}
+              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {[
+                  { icon: '🎨', title: t.features.visual.title, desc: t.features.visual.desc },
+                  { icon: '⚡', title: t.features.shareable.title, desc: t.features.shareable.desc },
+                  { icon: '🔗', title: t.features.instant.title, desc: t.features.instant.desc }
+                ].map((feature, index) => (
+                  <div
+                    key={feature.title}
+                    className={`glass group p-6 rounded-2xl transition-all duration-500 hover:scale-105 animate-fadeInScale ${isDark
+                      ? 'bg-white/5 hover:bg-white/10'
+                      : 'bg-white/20 hover:bg-white/30'
+                      }`}
+                    style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+                  >
+                    <div className="text-3xl mb-3 transition-transform duration-300 group-hover:scale-110">
+                      {feature.icon}
+                    </div>
+                    <h3 className={`font-semibold mb-1 transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-800'
+                      }`}>
+                      {feature.title}
+                    </h3>
+                    <p className={`text-sm transition-colors duration-300 ${isDark ? 'text-white/50' : 'text-slate-600'
+                      }`}>
+                      {feature.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </main>
+
+          {/* Footer */}
+          <footer className="p-6 text-center">
+            <p className={`text-sm transition-colors duration-300 ${isDark ? 'text-white/40' : 'text-slate-500'}`}>
+              {t.footer.madeWith}{" "}
+              <a
+                href="mailto:esteban.abanto.2709@gmail.com"
+                className={`transition-colors duration-300 hover:underline ${isDark ? 'text-white/60 hover:text-white/80' : 'text-slate-600 hover:text-slate-800'
+                  }`}
+              >
+                Esteban Abanto
+              </a>
+              {" "}{t.footer.openSource}
+            </p>
+          </footer>
+        </div>
+      </div>
+    </>
+  );
+}

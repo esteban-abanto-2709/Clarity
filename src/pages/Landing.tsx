@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useI18n } from '../lib/i18n';
-import type { Language } from '../lib/i18n';
+import { useI18n } from '@/lib/i18n';
+import type { Language } from '@/lib/i18n';
 
 export default function Landing() {
   const [isDark, setIsDark] = useState(true);

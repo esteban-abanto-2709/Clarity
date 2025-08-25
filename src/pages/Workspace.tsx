@@ -1,7 +1,7 @@
-import InfiniteCanvas from "../components/InfiniteCanvas";
-import WorkspaceHeader from "../components/workspace/WorkspaceHeader";
-import WorkspaceSidebar from "../components/workspace/WorkspaceSidebar";
-import WorkspaceFooter from "../components/workspace/WorkspaceFooter";
+import InfiniteCanvas from "@/components/InfiniteCanvas";
+import WorkspaceHeader from "@/components/workspace/WorkspaceHeader";
+import WorkspaceSidebar from "@/components/workspace/WorkspaceSidebar";
+import WorkspaceFooter from "@/components/workspace/WorkspaceFooter";
 
 export default function Workspace() {
   return (

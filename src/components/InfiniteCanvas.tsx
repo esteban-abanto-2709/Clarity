@@ -2,7 +2,7 @@ import { Stage, Layer, Line } from "react-konva";
 import { useState } from "react";
 import type { KonvaEventObject } from "konva/lib/Node";
 
-export default function Whiteboard() {
+export default function InfiniteCanvas() {
   const [lines, setLines] = useState<{ x: number; y: number }[][]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
 

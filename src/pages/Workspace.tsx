@@ -1,4 +1,4 @@
-import InfiniteCanvas from "@/components/InfiniteCanvas";
+import InfiniteCanvas from "@/components/canvas/InfiniteCanvas";
 import WorkspaceHeader from "@/components/workspace/WorkspaceHeader";
 import WorkspaceSidebar from "@/components/workspace/WorkspaceSidebar";
 import WorkspaceFooter from "@/components/workspace/WorkspaceFooter";

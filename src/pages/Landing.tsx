@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useI18n } from '@/lib/i18n';
-import type { Language } from '@/lib/i18n';
+import { useTranslation } from 'react-i18next';
 
 export default function Landing() {
   const [isDark, setIsDark] = useState(true);
-  const { language, changeLanguage, t, isLoading } = useI18n();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     // Check for saved theme preference or default to dark
@@ -24,29 +23,21 @@ export default function Landing() {
     localStorage.setItem('clarity-theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
+  useEffect(() => {
+    // Actualizar el título del documento cuando cambie el idioma
+    document.title = `Clarity - ${t('landing.title')} ${t('landing.titleHighlight')}`;
+    // Actualizar el idioma del documento HTML
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language, t]);
+
   const toggleTheme = () => {
     setIsDark(!isDark);
   };
 
   const toggleLanguage = () => {
-    const newLanguage: Language = language === 'es' ? 'en' : 'es';
-    changeLanguage(newLanguage);
+    const newLanguage = i18n.language === 'es' ? 'en' : 'es';
+    i18n.changeLanguage(newLanguage);
   };
-
-  // Mostrar loading mientras se cargan las traducciones
-  if (isLoading) {
-    return (
-      <div className={`min-h-screen flex items-center justify-center transition-all duration-700 ${
-        isDark
-          ? 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
-          : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50'
-      }`}>
-        <div className={`text-2xl font-light ${isDark ? 'text-white' : 'text-slate-800'}`}>
-          {t('common.loading')}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className={`min-h-screen transition-all duration-700 ${
@@ -103,7 +94,7 @@ export default function Landing() {
                     : 'bg-white/30 hover:bg-white/50 text-slate-800'
                 }`}
               >
-                {language.toUpperCase()}
+                {i18n.language.toUpperCase()}
               </button>
 
               {/* Theme Toggle */}
